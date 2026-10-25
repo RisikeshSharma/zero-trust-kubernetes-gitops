@@ -1,0 +1,20 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "default-deny-all"
+  namespace: "production"
+spec:
+  description: "Zero-Trust default deny all inbound and outbound traffic unless explicitly whitelisted."
+  endpointSelector:
+    matchLabels: {}
+  ingress: []
+  egress:
+    - toEntities:
+        - cluster
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"

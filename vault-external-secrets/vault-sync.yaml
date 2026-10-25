@@ -1,0 +1,33 @@
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: hashicorp-vault-store
+  namespace: production
+spec:
+  provider:
+    vault:
+      server: "https://vault.internal.corp:8200"
+      path: "secret"
+      version: "v2"
+      auth:
+        kubernetes:
+          mountPath: "kubernetes"
+          role: "aks-production-role"
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: database-credentials-sync
+  namespace: production
+spec:
+  refreshInterval: "1h"
+  secretStoreRef:
+    name: hashicorp-vault-store
+    kind: SecretStore
+  target:
+    name: db-credentials-k8s
+  data:
+    - secretKey: DB_PASSWORD
+      remoteRef:
+        key: production/database
+        property: password
