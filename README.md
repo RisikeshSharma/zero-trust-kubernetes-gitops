@@ -47,4 +47,4 @@ flowchart TD
 
 **Rishikesh Sharma**  
 Senior DevSecOps Engineer & Cloud Solutions Architect  
-[GitHub Profile](https://github.com/RisikeshSharma) · [LinkedIn](https://linkedin.com)
+[GitHub Profile](https://github.com/RisikeshSharma) · [LinkedIn](https://www.linkedin.com/in/rishikesh-sharma-devsecops)
